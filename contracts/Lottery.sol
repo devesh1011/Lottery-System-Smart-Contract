@@ -17,7 +17,7 @@ contract Lottery {
     }
 
     function getBalance() public view returns (uint256) {
-        require(msg.sender == manager);
+        require(msg.sender == manager, "You are not the manager");
         return address(this).balance;
     }
 
@@ -35,8 +35,8 @@ contract Lottery {
     }
 
     function selectWinner() public returns (address) {
-        require(msg.sender == manager);
-        require(participants.length >= 3);
+        require(msg.sender == manager, "You are not the manager");
+        require(participants.length >= 3, "There must be atleast 3 players");
 
         uint256 randomNum = getRandom();
         uint256 indexVal = randomNum % participants.length;
